@@ -10,33 +10,33 @@ import model
 parser = argparse.ArgumentParser(description='crnn model to recognise the words in image')
 
 # Location of data
-parser.add_argument('--image-path', type=str, default='ICPR_text_train_part2_20180313/image_9000',
+parser.add_argument('--image_path', type=str, default='ICPR_text_train_part2_20180313/image_9000',
                     help='image location')
-parser.add_argument('--text-path', type=str, default='ICPR_text_train_part2_20180313/txt_9000',
+parser.add_argument('--text_path', type=str, default='ICPR_text_train_part2_20180313/txt_9000',
                     help='label location')
-parser.add_argument('--json-path', type=str, default='json/meta.json',
+parser.add_argument('--json_path', type=str, default='json/meta.json',
                     help='json file location')
-parser.add_argument('--json-val-path', type=str, default='json/val.json',
+parser.add_argument('--json_val_path', type=str, default='json/val.json',
                     help='json validation file location')
-parser.add_argument('--save-path', type=str, default='data',
+parser.add_argument('--save_path', type=str, default='data',
                     help='image after preprocess')
-parser.add_argument('--key-path', type=str, default='key/keys.txt',
+parser.add_argument('--key_path', type=str, default='key/keys.txt',
                     help='all char in labels')
-parser.add_argument('--model-path', type=str, default='model',
+parser.add_argument('--model_path', type=str, default='model',
                     help='model path')
 
-parser.add_argument('--image-height', type=int, default=32,
+parser.add_argument('--image_height', type=int, default=32,
                     help='image height')
-parser.add_argument('--image-width', type=int, default=100,
+parser.add_argument('--image_width', type=int, default=100,
                     help='image width')
-parser.add_argument('--max-label-length', type=int, default=20,
+parser.add_argument('--max_label_length', type=int, default=20,
                     help='max label length')
 # model options
-parser.add_argument('--rnn-unit', type=int, default=32,
+parser.add_argument('--rnn_unit', type=int, default=32,
                     help='rnn unit')
 
 # Training options
-parser.add_argument('--batch-size', type=int, default=64,
+parser.add_argument('--batch_size', type=int, default=64,
                     help='batch size')
 parser.add_argument('--epochs', type=int, default=100,
                     help='upper epoch limit')
@@ -70,7 +70,7 @@ tensorboard = TensorBoard(args.model_path + '/tflog',write_graph=True)
 
 res = model.fit_generator(train,
                     steps_per_epoch = dataset.train_length // args.batch_size,
-                    epochs = 20,
+                    epochs = args.epochs,
                     validation_data = val ,
                     validation_steps = dataset.val_length // args.batch_size,
                     callbacks =[earlystop,checkpoint,tensorboard],
