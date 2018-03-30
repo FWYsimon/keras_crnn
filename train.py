@@ -53,7 +53,7 @@ dataset.random_get_val()
 train = dataset.generate(args.json_path, args.save_path, args.key_path, args.batch_size, args.max_label_length, (args.image_height, args.image_width))
 val = dataset.generate(args.json_val_path, args.save_path, args.key_path, args.batch_size, args.max_label_length, (args.image_height, args.image_width))
 
-crnn = CRNN(args)
+crnn = model.CRNN(args)
 y_pred = crnn.model()
 loss = crnn.get_loss(y_pred)
 inputs = crnn.inputs
